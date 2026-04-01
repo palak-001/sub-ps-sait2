@@ -4,7 +4,7 @@ const DEFAULT_TARGETS = {
   activity: 30,
   meals: 3,
   screen_break: true,
-  stress_relief: true
+  stress_relief: true,
 };
 
 export const loadData = (key, defaultVal) => {
@@ -27,14 +27,14 @@ export const saveData = (key, val) => {
 
 export const getTodayDateString = () => {
   const date = new Date();
-  return date.toISOString().split('T')[0];
+  return date.toISOString().split("T")[0];
 };
 
-export const loadTargets = () => loadData('targets', DEFAULT_TARGETS);
-export const saveTargets = (targets) => saveData('targets', targets);
+export const loadTargets = () => loadData("targets", DEFAULT_TARGETS);
+export const saveTargets = (targets) => saveData("targets", targets);
 
-export const loadHistory = () => loadData('history', {});
-export const saveHistory = (history) => saveData('history', history);
+export const loadHistory = () => loadData("history", {});
+export const saveHistory = (history) => saveData("history", history);
 
 // Format history: records indexed by date YYYY-MM-DD
 // Example: { "2023-10-01": { hydration: true, sleep: false, activity: true, meals: false, screen_break: true, stress_relief: true } }

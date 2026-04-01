@@ -6,10 +6,10 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { getTodayDateString } from '../utils/storage';
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { getTodayDateString } from "../utils/storage";
 
 ChartJS.register(
   CategoryScale,
@@ -18,37 +18,39 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export default function TrendChart({ history, targets, calculateScore }) {
   const last7Days = Array.from({ length: 7 }, (_, i) => {
     const d = new Date();
     d.setDate(d.getDate() - (6 - i));
-    return d.toISOString().split('T')[0];
+    return d.toISOString().split("T")[0];
   });
 
-  const scores = last7Days.map(date => {
+  const scores = last7Days.map((date) => {
     const data = history[date];
     return data ? calculateScore(data, targets) : 0;
   });
 
-  const labels = last7Days.map(date => {
+  const labels = last7Days.map((date) => {
     const d = new Date(date);
-    return date === getTodayDateString() ? 'Today' : d.toLocaleDateString('en-US', { weekday: 'short' });
+    return date === getTodayDateString()
+      ? "Today"
+      : d.toLocaleDateString("en-US", { weekday: "short" });
   });
 
   const data = {
     labels,
     datasets: [
       {
-        label: 'Wellness Score',
+        label: "Wellness Score",
         data: scores,
-        borderColor: '#000000',
-        backgroundColor: '#FDE047',
+        borderColor: "#000000",
+        backgroundColor: "#FDE047",
         borderWidth: 4,
-        pointBackgroundColor: '#3B82F6',
-        pointBorderColor: '#000000',
+        pointBackgroundColor: "#3B82F6",
+        pointBorderColor: "#000000",
         pointBorderWidth: 4,
         pointRadius: 6,
         pointHoverRadius: 8,
@@ -68,66 +70,66 @@ export default function TrendChart({ history, targets, calculateScore }) {
           stepSize: 20,
           font: {
             family: "'Space Grotesk', sans-serif",
-            weight: 'bold',
-            size: 14
+            weight: "bold",
+            size: 14,
           },
-          color: '#000'
+          color: "#000",
         },
         grid: {
-          color: '#000',
+          color: "#000",
           lineWidth: 2,
         },
         border: {
-          color: '#000',
-          width: 4
-        }
+          color: "#000",
+          width: 4,
+        },
       },
       x: {
         ticks: {
           font: {
             family: "'Space Grotesk', sans-serif",
-            weight: 'bold',
-            size: 14
+            weight: "bold",
+            size: 14,
           },
-          color: '#000'
+          color: "#000",
         },
         grid: {
-          display: false
+          display: false,
         },
         border: {
-          color: '#000',
-          width: 4
-        }
-      }
+          color: "#000",
+          width: 4,
+        },
+      },
     },
     plugins: {
       legend: {
-        display: false
+        display: false,
       },
       tooltip: {
-        backgroundColor: '#fff',
-        titleColor: '#000',
-        bodyColor: '#000',
-        borderColor: '#000',
+        backgroundColor: "#fff",
+        titleColor: "#000",
+        bodyColor: "#000",
+        borderColor: "#000",
         borderWidth: 4,
         titleFont: {
           family: "'Space Grotesk', sans-serif",
-          weight: 'bold',
-          size: 16
+          weight: "bold",
+          size: 16,
         },
         bodyFont: {
           family: "'Space Grotesk', sans-serif",
-          weight: 'bold',
-          size: 16
+          weight: "bold",
+          size: 16,
         },
         padding: 12,
         cornerRadius: 0,
         displayColors: false,
         callbacks: {
-          label: (context) => `${context.parsed.y}%`
-        }
-      }
-    }
+          label: (context) => `${context.parsed.y}%`,
+        },
+      },
+    },
   };
 
   return (

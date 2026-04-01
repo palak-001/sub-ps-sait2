@@ -1,28 +1,28 @@
-import { motion } from 'framer-motion';
-import { Settings as SettingsIcon, Save, ArrowLeft } from 'lucide-react';
-import { useState } from 'react';
+import { motion } from "framer-motion";
+import { Settings as SettingsIcon, Save, ArrowLeft } from "lucide-react";
+import { useState } from "react";
 
 export default function Settings({ targets, setTargets, onNavigate }) {
   const [localTargets, setLocalTargets] = useState({ ...targets });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setLocalTargets(prev => ({
+    setLocalTargets((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : Number(value)
+      [name]: type === "checkbox" ? checked : Number(value),
     }));
   };
 
   const handleSave = () => {
     setTargets(localTargets);
-    onNavigate('dashboard');
+    onNavigate("dashboard");
   };
 
   return (
     <div className="max-w-xl mx-auto min-h-screen p-6 py-12">
       <div className="flex items-center gap-4 mb-8">
         <button
-          onClick={() => onNavigate('dashboard')}
+          onClick={() => onNavigate("dashboard")}
           className="p-3 bg-white border-4 border-black rounded-full shadow-neo hover:translate-press hover:shadow-neo-pressed transition-all"
         >
           <ArrowLeft className="w-8 h-8" />
@@ -100,7 +100,9 @@ export default function Settings({ targets, setTargets, onNavigate }) {
             onChange={handleChange}
             className="w-8 h-8 accent-neoBlue outline-none border-4 border-black bg-white"
           />
-          <span className="text-xl font-bold">Track Screen Breaks (Hourly)</span>
+          <span className="text-xl font-bold">
+            Track Screen Breaks (Hourly)
+          </span>
         </div>
 
         <div className="flex items-center gap-4 bg-red-100 p-4 border-4 border-black rounded-lg">
